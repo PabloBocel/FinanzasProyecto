@@ -1,5 +1,4 @@
 <!--Finanzas Pro Inicio-->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +22,7 @@
               Registro / Inicio de sesión
             </div>
       
-            <form id="formulario-registro" action="/registro" method="post">
+            <form id="formulario-registro" action="#" method="post" onsubmit="return validarFormulario()">
               <label for="username" style="width: 200px">Nombre de usuario:</label><br>
               <input type="text" name="username" placeholder="Ingrese su nombre de usuario" style="margin-bottom: 10px; padding: 5px 125px; text-align: center;" required><br>
       
@@ -36,38 +35,38 @@
               <label for="confirm_password" style="width: 200px">Confirmar contraseña:</label><br>
               <input type="password" name="confirm_password" placeholder="Confirme su contraseña" style="margin-bottom: 10px; padding: 5px 125px; text-align: center;" required><br>
       
-              <button type="submit" style="margin-bottom: 20px; background-color: rgb(10, 66, 126); color: white; padding: 10px 200px; border: none; border-radius: 5px;">Registrarse</button>
+              <button type="submit" style="margin-bottom: 20px; background-color: rgb(10, 66, 126); color: white; padding: 12px 200px; border: none; border-radius: 5px;">Registrarse</button>
             </form>
           </div>
         </div>
-      </div>
+    </div>
       
-      <script>
+    <script>
         function validarFormulario() {
-          var username = document.getElementById("username").value;
+          var username = document.getElementsByName("username")[0].value;
+          var email = document.getElementsByName("email")[0].value;
+          var password = document.getElementsByName("password")[0].value;
+          var confirm_password = document.getElementsByName("confirm_password")[0].value;
         
-          // Validar si el nombre de usuario está vacío
-          if (username === "") {
-            alert("Por favor, ingrese un nombre de usuario.");
-            return false; // Detener el envío del formulario
-          }
-          if (email === "") {
-            alert("Por favor, ingrese un nombre de usuario.");
-            return false; // Detener el envío del formulario
-          }
-          if (password === "") {
-            alert("Por favor, ingrese un nombre de usuario.");
-            return false; // Detener el envío del formulario
-          }
-          if (confirm_password === "") {
-            alert("Por favor, ingrese un nombre de usuario.");
+          // Validar si los campos obligatorios están completos
+          if (username === "" || email === "" || password === "" || confirm_password === "") {
+            alert("Por favor, complete todos los campos obligatorios.");
             return false; // Detener el envío del formulario
           }
         
-          return true; // Permitir el envío del formulario
+          // Verificar si la contraseña y la confirmación de contraseña son iguales
+          if (password !== confirm_password) {
+            alert("Las contraseñas no coinciden. Por favor, asegúrese de que las contraseñas coincidan.");
+            return false; // Detener el envío del formulario
+          }
+        
+          // Redirigir a la nueva página después de enviar el formulario
+          window.location.href = "Casa.html";
+        
+          // Evitar el envío del formulario por defecto
+          return false;
         }
-        </script>
-      
+    </script>
             
 </body>
 </html>

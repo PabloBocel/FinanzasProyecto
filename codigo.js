@@ -1,3 +1,5 @@
+
+
 // 1. Registro e ingrerso de gastos 
 
 // Objeto para almacenar los ingresos y gastos

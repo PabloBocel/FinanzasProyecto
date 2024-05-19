@@ -4,6 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nueva Página</title>
+    <title>Calendario Interactivo</title>
+    <style>
+            body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .left-panel {
+            flex: 0.2; /* Ajusta este valor para cambiar el tamaño del panel izquierdo */
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .left-panel .button-container {
+            width: 80px; /* Ajusta el ancho del contenedor de botones */
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .left-panel button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .center-panel {
+            flex: 1.6; /* Ajusta este valor para cambiar el tamaño del panel central */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .center-panel .info-box {
+            width: 80%; /* Ajusta el ancho de los cuadros de información */
+            padding: 20px;
+            border: 1px solid black;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .right-panel {
+            flex: 1.2; /* Ajusta este valor para cambiar el tamaño del panel derecho */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+        .calendar-container {
+            width: 100%;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .calendar-header span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .calendar-header button {
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .calendar-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .calendar-body div {
+            width: 14.28%;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <div style="display: flex; height: 100vh;">
@@ -57,11 +151,61 @@
         </div>
         
         <!-- Sección derecha con calendario organizador -->
-        <div style="flex: 2; display: flex; flex-direction: column; align-items: center; justify-content: space-around;">
-            <!-- Agrega tu calendario organizador aquí -->
-            Calendario
+        <div class="right-panel">
+            <!-- Calendario organizador -->
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button onclick="previousWeek()">&lt;</button>
+                    <span id="calendar-month">Mayo 2024</span>
+                    <button onclick="nextWeek()">&gt;</button>
+                </div>
+                <div class="calendar-body" id="calendar-days">
+                    <!-- Días de la semana se generarán dinámicamente -->
+                </div>
+            </div>
+            <!-- Aquí puedes agregar más contenido debajo del calendario si es necesario -->
         </div>
     </div>
+    
+    <script>
+        // Inicialización del calendario
+        const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        const today = new Date();
+        let currentWeekStart = new Date(today.setDate(today.getDate() - today.getDay()));
+
+        function renderCalendar() {
+            const monthElement = document.getElementById("calendar-month");
+            const daysElement = document.getElementById("calendar-days");
+            daysElement.innerHTML = "";
+
+            const weekDays = [];
+            for (let i = 0; i < 7; i++) {
+                const day = new Date(currentWeekStart);
+                day.setDate(currentWeekStart.getDate() + i);
+                weekDays.push(day);
+            }
+
+            monthElement.textContent = `${monthNames[currentWeekStart.getMonth()]} ${currentWeekStart.getFullYear()}`;
+
+            weekDays.forEach(day => {
+                const dayElement = document.createElement("div");
+                dayElement.textContent = day.getDate();
+                daysElement.appendChild(dayElement);
+            });
+        }
+
+        function previousWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+            renderCalendar();
+        }
+
+        function nextWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+            renderCalendar();
+        }
+
+        document.addEventListener("DOMContentLoaded", renderCalendar);
+    </script>
 </body>
 
 </html>

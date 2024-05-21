@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva Página</title>
     <title>Calendario Interactivo</title>
     <style>
-            body, html {
+        body, html {
             margin: 0;
             padding: 0;
             height: 100%;
@@ -17,14 +16,14 @@
             height: 100vh;
         }
         .left-panel {
-            flex: 0.2; /* Ajusta este valor para cambiar el tamaño del panel izquierdo */
+            flex: 0.2;
             display: flex;
             justify-content: flex-end;
             align-items: center;
             background-color: #f0f0f0;
         }
         .left-panel .button-container {
-            width: 80px; /* Ajusta el ancho del contenedor de botones */
+            width: 80px;
             height: auto;
             display: flex;
             flex-direction: column;
@@ -40,7 +39,7 @@
             cursor: pointer;
         }
         .center-panel {
-            flex: 1.6; /* Ajusta este valor para cambiar el tamaño del panel central */
+            flex: 1.6;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -48,14 +47,14 @@
             padding: 20px;
         }
         .center-panel .info-box {
-            width: 80%; /* Ajusta el ancho de los cuadros de información */
+            width: 80%;
             padding: 20px;
             border: 1px solid black;
             margin-bottom: 20px;
             text-align: center;
         }
         .right-panel {
-            flex: 1.2; /* Ajusta este valor para cambiar el tamaño del panel derecho */
+            flex: 1.2;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -87,125 +86,178 @@
             cursor: pointer;
         }
         .calendar-body {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
         }
-        .calendar-body div {
-            width: 14.28%;
+        .calendar-day {
             text-align: center;
             padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            position: relative;
+            background-color: white;
+        }
+        .calendar-day-header {
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
+        .event {
+            background-color: #ffecb3;
+            border: 1px solid #fbc02d;
+            border-radius: 3px;
+            padding: 2px 5px;
+            margin-top: 2px;
+        }
+        .add-event-button {
+            margin-top: 10px;
+            background-color: #42a5f5;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div style="display: flex; height: 100vh;">
-        <!-- Sección izquierda con botones interactivos -->
-        <div style="flex: 1;">
-            <!-- Contenedor para los botones con estilo de rectángulo -->
-            <div style="width: 100px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-around; background-color: #f0f0f0; padding: 10px; border-radius: 10px;">
-                <!-- Botón 1 con ícono -->
-                <button style="background-color: transparent; border: none; outline: none;">
-                    <img src="icono_boton_1.png" alt="Seguimiento de Presupuesto" style="width: 50px; height: 50px;">
-                </button>
-                <!-- Botón 2 con ícono -->
-                <button style="background-color: transparent; border: none; outline: none;">
-                    <img src="icono_boton_2.png" alt="Programación de pagos" style="width: 50px; height: 50px;">
-                </button>
-                <!-- Botón 3 con ícono -->
-                <button style="background-color: transparent; border: none; outline: none;">
-                    <img src="icono_boton_3.png" alt="Programacion de pagos" style="width: 50px; height: 50px;">
-                </button>
-                <!-- Botón 4 con ícono -->
-                <button style="background-color: transparent; border: none; outline: none;">
-                    <img src="icono_boton_4.png" alt="Programación de pagos" style="width: 50px; height: 50px;">
-                </button>
-                <!-- Botón 5 con ícono -->
-                <button style="background-color: transparent; border: none; outline: none;">
-                    <img src="icono_boton_5.png" alt="Generación de reportes" style="width: 50px; height: 50px;">
-                </button>
-                <!-- Botón 6 con ícono -->
-                <button style="background-color: transparent; border: none; outline: none;">
-                    <img src="icono_boton_6.png" alt="Planificación financiera" style="width: 50px; height: 50px;">
-                </button>
-                <!-- Botón 7 con ícono -->
-                <button style="background-color: transparent; border: none; outline: none;">
-                    <img src="icono_boton_7.png" alt="Términos de privacidad" style="width: 50px; height: 50px;">
-                </button>
+    <div class="container">
+        <div class="left-panel">
+            <div class="button-container">
+                <button><img src="icono_boton_1.png" alt="Seguimiento de Presupuesto" style="width: 50px; height: 50px;"></button>
+                <button><img src="icono_boton_2.png" alt="Programación de pagos" style="width: 50px; height: 50px;"></button>
+                <button><img src="icono_boton_3.png" alt="Programación de pagos" style="width: 50px; height: 50px;"></button>
+                <button><img src="icono_boton_4.png" alt="Programación de pagos" style="width: 50px; height: 50px;"></button>
+                <button><img src="icono_boton_5.png" alt="Generación de reportes" style="width: 50px; height: 50px;"></button>
+                <button><img src="icono_boton_6.png" alt="Planificación financiera" style="width: 50px; height: 50px;"></button>
+                <button><img src="icono_boton_7.png" alt="Términos de privacidad" style="width: 50px; height: 50px;"></button>
             </div>
         </div>
-        
-        <!-- Sección central con cuadros de información -->
-        <div style="flex: 2; display: flex; flex-direction: column; align-items: center; justify-content: space-around;">
-            <!-- Cuadro 1 con información -->
-            <div style="padding: 20px; border: 1px solid black; margin-bottom: 20px;">
-                <!-- Contenido del cuadro 1 -->
-                Información 1
-            </div>
-            <!-- Cuadro 2 con información -->
-            <div style="padding: 20px; border: 1px solid black;">
-                <!-- Contenido del cuadro 2 -->
-                Información 2
-            </div>
+        <div class="center-panel">
+            <div class="info-box">Información 1</div>
+            <div class="info-box">Información 2</div>
         </div>
-        
-        <!-- Sección derecha con calendario organizador -->
         <div class="right-panel">
-            <!-- Calendario organizador -->
             <div class="calendar-container">
                 <div class="calendar-header">
-                    <button onclick="previousWeek()">&lt;</button>
+                    <button onclick="previousMonth()">&lt;</button>
                     <span id="calendar-month">Mayo 2024</span>
-                    <button onclick="nextWeek()">&gt;</button>
+                    <button onclick="nextMonth()">&gt;</button>
                 </div>
-                <div class="calendar-body" id="calendar-days">
-                    <!-- Días de la semana se generarán dinámicamente -->
-                </div>
+                <div class="calendar-body" id="calendar-days"></div>
             </div>
-            <!-- Aquí puedes agregar más contenido debajo del calendario si es necesario -->
         </div>
     </div>
     
+    <!-- Modal para agregar eventos -->
+    <div id="event-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; border:1px solid #ddd; padding:20px; border-radius:5px;">
+        <h3>Añadir Evento</h3>
+        <label>Fecha: <span id="event-date"></span></label>
+        <br>
+        <label>Título: <input type="text" id="event-title"></label>
+        <br>
+        <button onclick="addEvent()">Añadir</button>
+        <button onclick="closeModal()">Cerrar</button>
+    </div>
+    
     <script>
-        // Inicialización del calendario
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
         const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        const today = new Date();
-        let currentWeekStart = new Date(today.setDate(today.getDate() - today.getDay()));
+        const dayNames = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+        let events = {};
 
         function renderCalendar() {
-            const monthElement = document.getElementById("calendar-month");
-            const daysElement = document.getElementById("calendar-days");
+            const daysElement = document.getElementById('calendar-days');
             daysElement.innerHTML = "";
+            const monthElement = document.getElementById('calendar-month');
+            monthElement.textContent = `${monthNames[currentMonth]} ${currentYear}`;
 
-            const weekDays = [];
-            for (let i = 0; i < 7; i++) {
-                const day = new Date(currentWeekStart);
-                day.setDate(currentWeekStart.getDate() + i);
-                weekDays.push(day);
+            dayNames.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.classList.add('calendar-day-header');
+                dayHeader.textContent = day;
+                daysElement.appendChild(dayHeader);
+            });
+
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.classList.add('calendar-day');
+                daysElement.appendChild(emptyCell);
             }
 
-            monthElement.textContent = `${monthNames[currentWeekStart.getMonth()]} ${currentWeekStart.getFullYear()}`;
-
-            weekDays.forEach(day => {
-                const dayElement = document.createElement("div");
-                dayElement.textContent = day.getDate();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('calendar-day');
+                dayElement.textContent = day;
+                dayElement.onclick = () => openModal(day);
                 daysElement.appendChild(dayElement);
-            });
+
+                const eventDate = `${currentYear}-${currentMonth + 1}-${day}`;
+                if (events[eventDate]) {
+                    events[eventDate].forEach(event => {
+                        const eventElement = document.createElement('div');
+                        eventElement.classList.add('event');
+                        eventElement.textContent = event;
+                        dayElement.appendChild(eventElement);
+                    });
+                }
+            }
         }
 
-        function previousWeek() {
-            currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+        function previousMonth() {
+            if (currentMonth === 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else {
+                currentMonth--;
+            }
             renderCalendar();
         }
 
-        function nextWeek() {
-            currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+        function nextMonth() {
+            if (currentMonth === 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else {
+                currentMonth++;
+            }
             renderCalendar();
         }
 
-        document.addEventListener("DOMContentLoaded", renderCalendar);
+        function openModal(day) {
+            const modal = document.getElementById('event-modal');
+            const eventDate = `${currentYear}-${currentMonth + 1}-${day}`;
+            document.getElementById('event-date').textContent = eventDate;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('event-modal');
+            modal.style.display = 'none';
+        }
+
+        function addEvent() {
+            const title = document.getElementById('event-title').value;
+            const date = document.getElementById('event-date').textContent;
+            if (!events[date]) {
+                events[date] = [];
+            }
+            events[date].push(title);
+            closeModal();
+            renderCalendar();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCalendar);
     </script>
 </body>
-
 </html>
+
+
